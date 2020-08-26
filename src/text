@@ -1,0 +1,55 @@
+Common description:
+1. Thinking about how to implement interaction with the user. Was made the decision to use a built-in python library - argparse. For convenience config of argparse was the move to separate file args_confings.py.
+2. Built a common interface(HandlerBase) based on abstract base class for opportunity easy add class that will be reacted to any client-action
+3. Implemented all necessary action-classes that response requirements (Map2dData, Map3dData, CalculateArea etc.)
+
+Conclusions:
+So simple structure of program allow any programmers easy to add any new functionality. For that enough just create a new class that implements the interface by HandlerBase class. And then fill fields in ARGS_PARSE_CONFIG variable located in args_config.py file. ARGS_PARSE_CONFIG is similar to JSON
+
+**client is any user that use program
+
+----------------------------------------------------------------------------------------------------
+Descriptions of all class-actions:
+1.Map2dData:
+Used the method 'scatter' from 'mathplotlib.pyplot' for the build plot. In this method transmitted position variables: x, y that was taken from file.
+This method takes optional param 'c' - that displays deep color. In our case this deep color == Z-coordinates. Then shows plot to the user with 'show' method from 'mathplotlib.pyplot'
+
+2. Map3dData:
+Create container for the plot named - figure. The added subplot that can display 3 axes. Build a plot in subplot by 'plot_trisurf' method that joins arbitrary points in 3d space by triangles.
+
+3. CalculateArea
+Calculate and print to a client console area of arbitrary 3d figure lean by '3D Planar Polygons' method. Method of calculation moved to a separate file named - find_area.py. In this file, we have an entry point method named area that accepts all our points in the 3D surface.
+
+4. MeanMedianStandardDeviation
+Using standards built-in NumPy methods for finding: mean, median, standard deviation.
+
+5. Monotonicity
+Checking each column(X, Y, Z) on monotonicity. For that run in a cycle  three columns data and check each column by not strict monotonicity with methods: is_increasing and is_decreasing 
+
+6. Interpolation
+131: wrap each our column to NumPy array
+132: generate new more density x, y points lean by our old x, y points
+133: Used the Radial Basis Function from scipy library that calculate interpolated function with two variables.
+134. Used interpolated function with newly generated x, y columns. This function returns the new Z column coordinations.
+Further code display two plots to the client. First plot built by data from a file. The second plot built with new coordinates.  In simple words - the second plot looks like the first plot(because it built by the same function) but more detailed.
+
+7. Approximation (by the flat quadrangular figure - like a linear approximation in 2d)
+158: wrap each our column to NumPy array
+159: generate evenly distributed x points that enter the function definition domain
+160: generate evenly distributed y points that enter the function definition domain
+161-163: these actions for generating more distributed new x, y points
+164: runs method that returns approximation function.
+165: get new Z-coordinates from our approximation function lean by our new x, y points.
+Further code just displays to client plot that builds by points from file and plot that build by our points that were received from the approximation function.
+
+8. IntegralInterpolationAndApproximation
+Due to inheritance this class from the Approximation and Interpolation class. We can simple use 'get_interpolation_function' and 'func_linear_approximation' methods that returns necessary for us functions. Then I use a double integral function named "dblquad" from 'scipy.integrate' package for calculating integral for approximation and interpolation functions.
+
+9.PartialDerivatives
+Firstly runs _calc_partial_derivative method:
+204: wrap each our column to NumPy array
+205: get our interpolation function
+Then in the cycle in this method, I run the _partial_derivative method for each x, y values. Partial derivative calculates immediately based on each x and y points.
+The method _partial_derivative is a simple wrap on the 'derivative' method that imported from 'scipy.misc'.
+So _calc_partial_derivative method returns two arrays that contain calculated partial derivates on x and y columns form file.
+'Execute' method display two plots: the first plot built by points from file and the second plot where Z-coordinates how calculated partial derivates by x or by y depending on the "axis" argument.

@@ -1,0 +1,19 @@
+form {
+  width: 300px;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  &>input[type='submit'] {
+    margin-top: 10px;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  text-align: right;
+  margin-top: 10px;
+}
