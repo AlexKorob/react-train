@@ -1,0 +1,30 @@
+.container {
+  display: grid;
+  // gap: 10px 30px;  // gap по вертикале - 10px, по горизонтале - 20px
+  gap: 10px;
+  // grid-template-columns: repeat(3, 300px);
+  // grid-template-columns: 200px 1fr 100px 2fr;
+  // grid-template-columns: 4rem 3rem 2rem;
+  // grid-template-columns: repeat(3, 200px 50px);  // Повторить 2 раза сначала (200px затем 50px) * 2
+  // grid-template-columns: repeat(3, 1fr);
+
+  grid-template-rows: repeat(3, auto);
+  background-color: aquamarine;
+  color: white;
+  font-size: 1rem;
+}
+
+.container>* {
+  background-color: #999999;
+  padding: 20px;
+  border-radius: 1rem;
+}
+
+.item:nth-child(3) {
+  grid-column: 2 / span 2;  // начиная со второй вертикальной линии элемент начинает занимать две ячейки!
+  grid-row: 1 / span 2;
+}
+
+.item:nth-child(4) {
+  order: -1;  // Все элементы по умолчанию имеют order == 0. Чем меньше order тем выше в DOM находится элемент
+}

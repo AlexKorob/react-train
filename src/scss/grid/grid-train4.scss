@@ -1,0 +1,37 @@
+.grid-4-container {
+  display: grid;
+  color: white;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  //grid-template:
+  //  'header   header   header   header' 30px
+  //  'article  article  .        sidebar' auto
+  //  'footer   footer   footer   footer' 30px / 1fr 1fr 50px 1fr;  // Такая запись указывает сначала строку с высотой, а через слэш(/) конфигурацию столбцов
+
+  grid-template-areas:
+  'header   header   header   header'
+  'article  article  .        sidebar'  // Точка указывает на пустое простанство
+  'footer   footer   footer   footer';
+
+  &>* {
+    padding: 20px;
+    border-radius: 1rem;
+  }
+
+  &>header {
+    grid-area: header;  // теперь эта grid-area называется header
+    background-color: green;
+  }
+  &>article {
+    grid-area: article;  // эта grid-area называется article
+    background-color: black;
+  }
+  &>aside {
+    grid-area: sidebar;
+    background-color: darkred;
+  }
+  &>footer {
+    grid-area: footer;
+    background-color: darkblue;
+  }
+}

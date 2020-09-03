@@ -1,0 +1,29 @@
+.grid-5-container {
+  display: grid;
+  color: white;
+  gap: 1rem;
+  grid-template: auto / repeat(3, 1fr);  // У строк размер auto, и 3 колонки по 1 фрагменту!
+  //justify-items: end;  // start | center | end | stretch
+  //align-items: end;  // start | center | end | stretch
+  place-items: end center;  // Комбинирует в себе и align-items и justify-items
+
+  &>* {
+    padding: 20px;
+    border-radius: 1rem;
+  }
+
+  &>header {
+    background-color: green;
+  }
+  &>article {
+    background-color: black;
+  }
+  &>aside {
+    background-color: darkred;
+    place-self: center end;  // like align-self: center; justify-self: end;
+  }
+  &>footer {
+    background-color: darkblue;
+  }
+}
+
