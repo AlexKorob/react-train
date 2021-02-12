@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 export default class NavBar extends React.Component {
@@ -7,13 +7,16 @@ export default class NavBar extends React.Component {
     return (
       <menu>
         {this.props.routerConfig.map((conf, pos) => {
-          let isLastItem = this.props.routerConfig.length - 1 === pos ? true : false;
-          return <Link
-                  to={conf.path}
-                  key={conf.name}
-                  style={{marginRight: isLastItem ? '0' : '20px'}}>
-                 {conf.name}
-                 </Link>
+          let isLastItem = this.props.routerConfig.length - 1 === pos;
+          return (
+            <Link
+              to={conf.path}
+              key={conf.name}
+              style={{ marginRight: isLastItem ? '0' : '20px' }}
+            >
+              {conf.name}
+            </Link>
+          );
         })}
       </menu>
     );

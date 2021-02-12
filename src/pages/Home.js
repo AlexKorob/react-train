@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import { useEffect } from 'react';
 import { useReducer } from 'react';
+import ArrayToTwoDimension from '../components/flatArrayToTwoDimension';
 
 export default class Home extends React.Component {
   static defaultProps = {
@@ -23,10 +24,14 @@ export default class Home extends React.Component {
         </div>
         <Counter />
         <Portal />
+
+        <hr />
+        <h3>Flat array to two dimension array:</h3>
+        <ArrayToTwoDimension />
       </>
     );
   }
-}
+};
 
 function Counter(props) {
   const [state, dispatchCount] = useReducer(reducer, { count: 0, ii: '123' });

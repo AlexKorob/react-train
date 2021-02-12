@@ -1,4 +1,9 @@
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
+} from 'react-router-dom';
 import React from 'react';
 
 import {ErrorBoundaryDefault} from './errorBoundaries.js';
@@ -32,16 +37,21 @@ const routerConfig = [
 export default () => (
   <React.StrictMode>
     <Router>
+      <Route exact path='/'>
+        {<Redirect to='/home' />}
+      </Route>
       <NavBar routerConfig={routerConfig} />
       <Switch>
         <ErrorBoundaryDefault>
           {routerConfig.map(conf => {
-            return <Route
-                    exact={conf.exact ? true : false}
-                    path={conf.path}
-                    component={conf.component}
-                    key={conf.name}
-                   />;
+            return (
+              <Route
+                exact={conf.exact ? true : false}
+                path={conf.path}
+                component={conf.component}
+                key={conf.name}
+              />
+            );
           })}
         </ErrorBoundaryDefault>
       </Switch>
